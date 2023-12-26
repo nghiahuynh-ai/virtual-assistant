@@ -7,7 +7,7 @@ from streamlit_chat import message
 from audio_recorder_streamlit import audio_recorder
 
 
-asr_backend = 'http://192.168.10.60:7070'
+asr_backend = 'http://172.19.94.162:7070'
 
 
 st.session_state.setdefault('audio_status', False)
@@ -30,19 +30,13 @@ def on_after_record(audio):
     ).json()
     try:
         transcript = response['transcript']
-        asr_time = response['asr_time']
-        audio = np.frombuffer(response['audio'], dtype=np.float32)
-        audio_dtype = response['audio_dtype']
+        audio = np.array(response['audio'])
         audio_sr = response['audio_sr']
-        tts_time = response['tts_time']
     except:
         transcript = None
-        asr_time = None
         audio = None
-        audio_dtype = None
         audio_sr = None
-        tts_time = None
-    return transcript, asr_time, audio, audio_dtype, audio_sr, tts_time
+    return transcript, audio, audio_sr
 
 
 logo, title = st.columns(2, gap="small")
@@ -77,7 +71,7 @@ with clearButtonSpace:
 with recordButtonSpace:
     st.write('\n')
     audio_bytes = audio_recorder(text='', pause_threshold=1000000, sample_rate=16000, icon_size='2x')
-    transcript, asr_time, audio, audio_dtype, audio_sr, tts_time = on_after_record(audio_bytes)
+    transcript, audio, audio_sr = on_after_record(audio_bytes)
         
     if transcript:
         st.session_state.user.append(transcript)
@@ -93,5 +87,4 @@ with recordButtonSpace:
                     is_table=False
                 )
 
-        audio = np.frombuffer(audio, dtype=audio_dtype)
-        audio_placeholder.audio(audio)
+        audio_placeholder.audio(audio, sample_rate=audio_sr)

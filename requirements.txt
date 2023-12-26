@@ -1,0 +1,17 @@
+flask
+flask_cors
+pydub
+nemo-toolkit
+nemo_text_processing
+hydra-core
+pytorch-lightning
+librosa
+sentencepiece
+youtokentome
+webdataset
+pyannote.audio
+jiwer
+IPython
+wandb
+torchvision
+openai

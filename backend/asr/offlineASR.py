@@ -4,17 +4,14 @@ import nemo.collections.asr as nemo_asr
 
 class OfflineASR:
 
-    def __init__(self, model_name):
+    def __init__(self, config):
         
-        try:
-            self.model = nemo_asr.models.ASRModel.from_pretrained(model_name)
-            self.device = self.model.device
-            self.model.eval()
-            self.model.preprocessor.featurizer.dither = 0.0
-            self.model.preprocessor.featurizer.pad_to = 0
-        except:
-            raise ValueError('Cannot initialize the ASR model with the given name')
-        
+        self.model = nemo_asr.models.ASRModel.from_pretrained(config['asr_model_name']).to('cpu').eval()
+        self.device = self.model.device
+        self.model.preprocessor.featurizer.dither = 0.0
+        self.model.preprocessor.featurizer.pad_to = 0
+
+    @torch.no_grad()
     def __call__(self, audio):
         signal, signal_length = self._preprocess(audio)
         output = self._transcribe(signal, signal_length)
