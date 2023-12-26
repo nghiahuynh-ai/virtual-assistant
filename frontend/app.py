@@ -22,7 +22,7 @@ def on_btn_click():
     
 def on_after_record(audio):
     if audio is None:
-        return None, None, None, None, None, None
+        return None, None, None
 
     response = requests.post(
         url=asr_backend,
