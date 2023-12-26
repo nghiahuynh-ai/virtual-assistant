@@ -33,6 +33,8 @@ async def speech2text():
 
 @app.route('/llm', methods=['POST'])
 async def generate_response():
+    content = request.json
+    print(content)
     return
 
 

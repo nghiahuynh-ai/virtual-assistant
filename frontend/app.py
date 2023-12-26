@@ -74,6 +74,11 @@ with recordButtonSpace:
     transcript, audio, audio_sr = on_after_record(audio_bytes)
         
     if transcript:
+        _ = requests.post(
+            url=f'{asr_backend}/llm',
+            json={'content': transcript}
+        ).json()
+        
         st.session_state.user.append(transcript)
         st.session_state.bot.append(transcript)
         id = str(time.time())
