@@ -3,13 +3,17 @@ import json
 import numpy as np
 from io import BytesIO
 from flask import Flask
-from flask import request
 from flask_cors import CORS
 from pydub import AudioSegment
 from asr.offlineASR import OfflineASR
 from tts.e2eTTS import E2ETTS
 from llm.llm import LLM
 from omegaconf import OmegaConf
+from flask import (
+    request, 
+    Response, 
+    stream_with_context
+)
 
 
 app = Flask(__name__)
@@ -34,8 +38,8 @@ async def speech2text():
 @app.route('/llm', methods=['POST'])
 async def generate_response():
     content = request.json
-    print(content)
-    return
+    response = llm(content)
+    return Response(response)
 
 
 @app.route('/tts', methods=['POST'])

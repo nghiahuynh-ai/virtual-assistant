@@ -5,7 +5,7 @@ class LLM:
     
     def __init__(self, config):
         
-        openai.api_key = config['openai_key']
+        openai.api_key = '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'
         
         self.model = config['chatgpt_name']
         self.prompt_base = config['prompt_base']

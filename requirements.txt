@@ -1,7 +1,8 @@
 flask
 flask_cors
 pydub
-nemo-toolkit
+nemo-toolkit[asr]
+nemo-toolkit[tts]
 nemo_text_processing
 hydra-core
 pytorch-lightning
@@ -14,5 +15,5 @@ jiwer
 IPython
 wandb
 torchvision
-openai
+openai==0.28
 asgiref

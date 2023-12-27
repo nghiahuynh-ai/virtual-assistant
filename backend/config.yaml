@@ -5,6 +5,6 @@ sr: 22050
 asr_model_name: stt_en_fastconformer_transducer_large
 tts_model_name: [tts_en_fastpitch, tts_en_hifigan]
 
-chatgpt_name: ft:gpt-3.5-turbo
-openai_key: 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
+chatgpt_name: 'gpt-3.5-turbo-16k-0613'
+openai_key: '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'
 prompt_base: 'Answer the following question within 512 characters: '
