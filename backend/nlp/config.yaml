@@ -1,0 +1,4 @@
+key: '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'
+model_name: 'gpt-3.5-turbo-0613'
+base_prompt: 'Answer the question whithin 512 characters: '
+# itv_info: itv.txt
